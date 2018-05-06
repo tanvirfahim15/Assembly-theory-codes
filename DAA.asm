@@ -1,11 +1,6 @@
 .MODEL SMALL
 .STACK 100h
-.DATA
-	CR EQU 0DH
-	LF EQU 0AH
-MSG1 DB 'Enter Uppercase:$'
-MSG2 DB 0DH,0AH,'In Lowercase:'
-CHAR DB ?,'$' 
+.DATA 
 
 .CODE
 MAIN PROC
