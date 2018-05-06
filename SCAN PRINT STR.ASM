@@ -1,0 +1,40 @@
+.MODEL SMALL
+.STACK 100h
+.DATA        
+STR 100 DUP(?)
+.CODE
+MAIN PROC
+
+MOV AX,@DATA
+MOV DS,AX    
+MOV CX,0
+LOP:
+    MOV AH,1
+    INT 21H
+    CMP AL,0DH
+    JE END_LOP 
+    MOV DL,AL
+    MOV BX,OFFSET STR
+    ADD BX,CX
+    MOV [BX],DL
+    INC CX
+    JMP LOP
+END_LOP:
+                
+    MOV BX,OFFSET STR
+    MOV DL,[BX]        
+    MOV DL,0AH
+    MOV AH,2
+    INT 21H     
+    MOV DL,0DH
+    MOV AH,2
+    INT 21H
+    
+    MOV BX,OFFSET STR
+    ADD BX,CX
+    MOV [BX],'$'
+    MOV DX,OFFSET STR
+    MOV AH,9
+    INT 21H
+MAIN ENDP
+	END MAIN
